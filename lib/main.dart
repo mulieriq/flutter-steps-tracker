@@ -22,7 +22,7 @@ class Khutaa extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       theme: ThemeManager.lightTheme,
       themeMode: ThemeMode.system,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HomePage(),
     );
   }
 }
