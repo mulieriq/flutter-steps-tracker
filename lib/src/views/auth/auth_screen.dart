@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:khutaa/src/views/home/home_page.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../utils/app_constants_util.dart';
+import '../../utils/app_extenstions_util.dart';
 import '../../utils/app_urls.dart';
 import '../../utils/color_palette_util.dart';
 import '../../utils/curve.dart';
@@ -10,8 +11,7 @@ import '../../widgets/common/app_buttons.dart';
 import '../../widgets/common/text_header.dart';
 import '../../widgets/forms/c_app_drop_down_field.dart';
 import '../../widgets/forms/c_text_form_field.dart';
-import 'package:sizer/sizer.dart';
-import '../../utils/app_extenstions_util.dart';
+import '../home/home_page.dart';
 
 class AuthenitcationScreen extends StatefulWidget {
   const AuthenitcationScreen({Key? key}) : super(key: key);

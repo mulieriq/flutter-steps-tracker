@@ -30,7 +30,7 @@ extension NavigationExtensions on BuildContext {
 extension AppNotifications on BuildContext {
   void showCustomSnackBar(String message, BuildContext context,
       {bool isError = false}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(this).showSnackBar(SnackBar(
       duration: Duration(seconds: 5),
       backgroundColor: isError ? Colors.red : ColorPallete.greenColor,
       content: Text(
@@ -41,9 +41,16 @@ extension AppNotifications on BuildContext {
         label: StringConstants.okayBtnText,
         textColor: Colors.white,
         onPressed: () {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          ScaffoldMessenger.of(this).hideCurrentSnackBar();
         },
       ),
     ));
+  }
+}
+
+extension DarkMode on BuildContext {
+  bool get isDarkMode {
+    final brightness = MediaQuery.of(this).platformBrightness;
+    return brightness == Brightness.dark;
   }
 }

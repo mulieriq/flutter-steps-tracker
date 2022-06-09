@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:khutaa/src/utils/string_constants_util.dart';
+import 'src/utils/string_constants_util.dart';
 import 'package:sizer/sizer.dart';
 
 import 'src/utils/theme_util.dart';

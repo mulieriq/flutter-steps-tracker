@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'color_palette_util.dart';
 
 class CurvePainter extends CustomPainter {

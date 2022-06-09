@@ -12,11 +12,14 @@ class StringConstants {
   static const String appName = 'Khutaa';
 
   static const String historyScreenAppBarTitle = "History Screen";
+  static const String redeemHealthPoints = "Redeem Health Points";
   static const String leadersBoardScreenAppBarTitle = "Leadersboard";
   static const String steps = "Steps";
   static const String welcome = "Welcome";
   static const String healthPoints = "Health Points";
   static const String collectReward = "Collect Reward";
+  static const String starbucksCoffee = "1 free large coffee";
+  static const String watchFromJarir = " Digital Watches";
 
   static const String changeLanguange = "Change Languange";
   static const String leadersBoard = "Leaders Board";

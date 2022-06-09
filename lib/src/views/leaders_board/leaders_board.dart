@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
+
 import '../../utils/app_urls.dart';
 import '../../utils/curve.dart';
 import '../../utils/string_constants_util.dart';
 import '../../widgets/common/app_cards.dart';
-import 'package:sizer/sizer.dart';
 
 class LeadersBoard extends StatefulWidget {
   const LeadersBoard({Key? key}) : super(key: key);

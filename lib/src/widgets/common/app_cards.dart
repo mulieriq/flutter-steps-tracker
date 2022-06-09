@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../utils/color_palette_util.dart';
 
 import '../../utils/app_constants_util.dart';
 import '../../utils/app_urls.dart';
+import '../../utils/color_palette_util.dart';
 
 class LeadersBoardCard extends StatelessWidget {
   final String imageAvator;
@@ -63,13 +63,6 @@ class SquareCard extends StatelessWidget {
           child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black54,
-                      offset: Offset(0.0, 1.0),
-                      blurRadius: 4.0,
-                    ),
-                  ],
                   color: ColorPallete.greyColor),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

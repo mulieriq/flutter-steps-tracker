@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:khutaa/src/utils/app_extenstions_util.dart';
-import 'package:khutaa/src/views/history/history_screen.dart';
-import 'package:khutaa/src/views/leaders_board/leaders_board.dart';
+import '../../utils/app_extenstions_util.dart';
+import '../../widgets/modals/common_modal.dart';
+import '../../widgets/modals/overlay_manager.dart';
+import '../history/history_screen.dart';
+import '../leaders_board/leaders_board.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/app_urls.dart';
@@ -26,12 +28,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget _circle(String text) {
     return Container(
-        width: 250,
-        height: 250,
+        width: 100.w,
+        height: 33.h,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            width: 4,
+            width: 1.w,
             color: Colors.grey.withOpacity(0.5),
           ),
         ),
@@ -41,14 +43,14 @@ class _HomePageState extends State<HomePage> {
           children: [
             Image.asset(
               AppUrls.appLogo,
-              width: 50,
-              height: 50,
+              width: 20.w,
+              height: 6.h,
             ),
             Center(
               child: Text(
                 text.toString(),
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      fontSize: 45,
+                      fontSize: 35.sp,
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -71,7 +73,9 @@ class _HomePageState extends State<HomePage> {
           fit: StackFit.loose,
           children: [
             Image.asset(
-              AppUrls.lightBackground,
+              context.isDarkMode
+                  ? AppUrls.darkBackground
+                  : AppUrls.lightBackground,
               width: double.infinity,
               height: MediaQuery.of(context).size.height,
               fit: BoxFit.fitHeight,
@@ -130,9 +134,58 @@ class _HomePageState extends State<HomePage> {
                         subtitle: "1200",
                         art: AppUrls.healthIcon,
                       ),
-                      SquareCard(
-                        title: StringConstants.collectReward,
-                        art: AppUrls.redeemIcon,
+                      InkWell(
+                        child: SquareCard(
+                          title: StringConstants.collectReward,
+                          art: AppUrls.redeemIcon,
+                        ),
+                        onTap: () => showModalBottomSheet<dynamic>(
+                            useRootNavigator: true,
+                            isScrollControlled: true,
+                            context: context,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            )),
+                            builder: (BuildContext bc) {
+                              return StatefulBuilder(
+                                  builder: (context, setState) => Container(
+                                      padding:
+                                          MediaQuery.of(context).viewInsets,
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 16, bottom: 16),
+                                            child: Text(
+                                              StringConstants
+                                                  .redeemHealthPoints,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline2!
+                                                  .copyWith(fontSize: 25),
+                                            ),
+                                          ),
+                                          Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                SquareCard(
+                                                  title: StringConstants
+                                                      .watchFromJarir,
+                                                  art: AppUrls.watch,
+                                                ),
+                                                SquareCard(
+                                                  title: StringConstants
+                                                      .starbucksCoffee,
+                                                  art: AppUrls.cupOfCofee,
+                                                )
+                                              ]),
+                                        ],
+                                      )));
+                            }),
                       )
                     ],
                   )
@@ -147,11 +200,28 @@ class _HomePageState extends State<HomePage> {
         children: [
           SpeedDialChild(
               child: Icon(
-                FontAwesomeIcons.sun,
+                context.isDarkMode
+                    ? FontAwesomeIcons.sun
+                    : FontAwesomeIcons.moon,
                 size: 16,
               ),
               label: StringConstants.light), //modal
           SpeedDialChild(
+            onTap: () => OverlayManager.show(
+              context: context,
+              child: Modal(
+                title: "Change Languange",
+                cancelButtonLabel: "Arabic",
+                onConfirmButtonTap: () async {
+                  context.back(true);
+                },
+                onCancel: () {
+                  context.back();
+                },
+              ),
+            ).then((value) async {
+              if (value != null) {}
+            }),
             child: Icon(
               FontAwesomeIcons.language,
               size: 16,
