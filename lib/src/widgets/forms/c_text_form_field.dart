@@ -72,11 +72,8 @@ class CTextFormField extends StatelessWidget {
       enabled: enabled,
       decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(
-            fontSize: fontSize ?? 16,
-            color: Colors.black54,
-            letterSpacing: hintTextLetterSpacing,
-          ),
+          hintStyle:
+              Theme.of(context).textTheme.headline1!.copyWith(fontSize: 16),
           border: border,
           enabledBorder: border,
           labelText: labelText,

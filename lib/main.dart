@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:khutaa/src/utils/string_constants_util.dart';
+import 'package:sizer/sizer.dart';
 
 import 'src/utils/theme_util.dart';
-import 'src/views/home/home_page.dart';
+import 'src/views/auth/auth_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,12 +19,14 @@ class Khutaa extends StatelessWidget {
   const Khutaa({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      darkTheme: ThemeData.dark(),
-      theme: ThemeManager.lightTheme,
-      themeMode: ThemeMode.system,
-      home: HomePage(),
-    );
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        title: StringConstants.appName,
+        darkTheme: ThemeData.dark(),
+        theme: ThemeManager.lightTheme,
+        themeMode: ThemeMode.system,
+        home: AuthenitcationScreen(),
+      );
+    });
   }
 }

@@ -21,6 +21,9 @@ dependencies:
   get_it:
   google_fonts:
   pedometer:
+  flutter_speed_dial:
+  font_awesome_flutter:
+  sizer:
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +43,7 @@ flutter:
 
   assets:
     - assets/app/
+    - assets/art/
 
   # fonts:
   #   - family: Schyler
