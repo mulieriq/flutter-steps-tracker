@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:khutaa/src/core/provider/config/app_base_provider.dart';
 import 'package:pedometer/pedometer.dart';
@@ -6,7 +7,6 @@ import '../../data/network/database_client.dart';
 
 class PedometerProvider extends BaseProvider {
   late Stream<StepCount> _stepCountStream;
-  late Stream<PedestrianStatus> _pedestrianStatusStream;
   BuildContext? context;
   String steps = '0';
   int _previousPoints = 0;
@@ -28,14 +28,15 @@ class PedometerProvider extends BaseProvider {
 
   calcHealtPoints(int steps) {
     int pointsMultipler = (steps / 100).floor();
-    int pointsGained = pointsMultipler * 10;
+    int pointsGained = pointsMultipler;
 
     healthPoint = pointsGained;
 
     _messagePointsGained = pointsGained - _previousPoints;
     var data = {"steps": steps, "healthPoints": pointsGained};
     var historyData = {
-      "message": "You ganed  $_messagePointsGained new points"
+      "message": "You ganed  $_messagePointsGained new points",
+      "userId": FirebaseAuth.instance.currentUser?.uid
     };
     FirebaseClient().updateUserSteps(data);
     FirebaseClient().addHistoryData(historyData);

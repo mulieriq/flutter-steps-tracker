@@ -29,5 +29,5 @@ class StringConstants {
   static const String dark = "Dark";
 
   static const String usersCollection = "users";
-  static const String historyCollection = "users";
+  static const String historyCollection = "history";
 }

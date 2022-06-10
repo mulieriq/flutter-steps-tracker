@@ -25,12 +25,12 @@ class FirebaseClient {
       .snapshots();
 
   Stream<QuerySnapshot>? getUserHistory(String userId) => _firestore
-      .collection(StringConstants.usersCollection)
+      .collection(StringConstants.historyCollection)
       .where("userId", isEqualTo: userId)
       .snapshots();
 
   Stream<QuerySnapshot>? getLeadersBoard(String userId) => _firestore
       .collection(StringConstants.usersCollection)
-      .orderBy('points')
+      .orderBy('steps', descending: true)
       .snapshots();
 }

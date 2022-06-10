@@ -32,7 +32,8 @@ class LeadersBoardCard extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             radius: 40,
-            child: Image.asset(AppUrls.gentIcon),
+            child: Image.asset(
+                imageAvator == "Male" ? AppUrls.gentIcon : AppUrls.ladyIcon),
           ),
           title: _text(userName),
           subtitle: _textSubtitle(points),

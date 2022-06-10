@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../core/data/network/database_client.dart';
 import '../../utils/app_urls.dart';
 import '../../utils/curve.dart';
 import '../../utils/string_constants_util.dart';
@@ -42,14 +45,50 @@ class _LeadersBoardState extends State<LeadersBoard> {
                       ),
                     ),
                     Expanded(
-                        child: ListView.separated(
-                            itemCount: 8,
-                            separatorBuilder: (context, _) => Divider(
-                                  indent: 30,
-                                  endIndent: 20,
-                                ),
-                            itemBuilder: (context, index) => LeadersBoardCard(
-                                "aye", "89 points", index + 1, "Eric Muli")))
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseClient().getLeadersBoard(
+                            FirebaseAuth.instance.currentUser!.uid),
+                        builder: (
+                          BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot,
+                        ) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator());
+                          } else if (snapshot.connectionState ==
+                                  ConnectionState.active ||
+                              snapshot.connectionState ==
+                                  ConnectionState.done) {
+                            if (snapshot.hasError) {
+                              return Center(child: const Text('Oops Men'));
+                            } else if (snapshot.hasData) {
+                              return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ListView.separated(
+                                      itemCount: (snapshot.data?.docs.length)!,
+                                      separatorBuilder: (context, _) => Divider(
+                                            indent: 30,
+                                            endIndent: 20,
+                                          ),
+                                      itemBuilder: (context, index) =>
+                                          LeadersBoardCard(
+                                              snapshot.data?.docs[index]
+                                                  ['gender'],
+                                              (snapshot
+                                                  .data?.docs[index]['steps']
+                                                  .toString())!,
+                                              index + 1,
+                                              snapshot.data?.docs[index]
+                                                  ['userName'])));
+                            } else {
+                              return Center(child: const Text('Keep Moving'));
+                            }
+                          } else {
+                            return Text('State: ${snapshot.connectionState}');
+                          }
+                        },
+                      ),
+                    )
                   ],
                 ),
               ],

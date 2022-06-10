@@ -1,5 +1,6 @@
 class AppUrls {
   static String gentIcon = "assets/art/gent.png";
+  static String ladyIcon = "assets/art/lady.png";
   static String redeemIcon = "assets/art/redeem.jpeg";
   static String healthIcon = "assets/art/health_icon.webp";
   static String lightBackground = "assets/art/light_background.jpg";

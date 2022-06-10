@@ -53,10 +53,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 ConnectionState.active ||
                             snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.hasError) {
-                            return Center(child: const Text('Error'));
+                            return Center(child: const Text('Oops Men'));
                           } else if (snapshot.hasData) {
                             return ListView.builder(
-                              itemCount: 10,
+                              itemCount: snapshot.data?.docs.length,
                               itemBuilder: (BuildContext context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -73,16 +73,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Title mkuu",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline2!
-                                                .copyWith(
-                                                  fontSize: 14.0,
-                                                ),
-                                          ),
-                                          Text(
-                                            "Body",
+                                            snapshot.data?.docs[index]
+                                                ['message'],
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline2!
@@ -98,7 +90,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               },
                             );
                           } else {
-                            return const Text('Empty data');
+                            return Center(
+                                child: Text(
+                              'Keep Moving',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline2!
+                                  .copyWith(fontSize: 25),
+                            ));
                           }
                         } else {
                           return Text('State: ${snapshot.connectionState}');
