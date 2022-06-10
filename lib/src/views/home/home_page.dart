@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../utils/app_extenstions_util.dart';
-import '../../widgets/modals/common_modal.dart';
-import '../../widgets/modals/overlay_manager.dart';
-import '../history/history_screen.dart';
-import '../leaders_board/leaders_board.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../utils/app_extenstions_util.dart';
 import '../../utils/app_urls.dart';
 import '../../utils/curve.dart';
 import '../../utils/string_constants_util.dart';
 import '../../widgets/common/app_cards.dart';
+import '../../widgets/modals/common_modal.dart';
+import '../../widgets/modals/overlay_manager.dart';
+import '../history/history_screen.dart';
+import '../leaders_board/leaders_board.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

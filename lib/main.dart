@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'firebase_options.dart';
+import 'src/core/provider/config/provider_setup.dart';
 import 'src/core/service_locator/locator.dart';
 import 'src/utils/app_urls.dart';
 import 'package:provider/provider.dart';
@@ -31,29 +32,33 @@ void main() async {
     await SentryFlutter.init((options) {
       options.dsn = dotenv.env["SENTRY_DSN"];
       options.debug = false;
-    }, appRunner: () => initializeApplication());
+    }, appRunner: () => runApp(const Khutaa()));
   }, (exception, stackTrace) async {
     await Sentry.captureException(exception, stackTrace: stackTrace);
   });
 }
 
-void initializeApplication() {
-  runApp(DefaultAssetBundle(
-    bundle: SentryAssetBundle(),
-    child: MultiProvider(
-      providers: [],
-      child: Sizer(builder: (context, orientation, deviceType) {
-        return MaterialApp(
-          navigatorObservers: [
-            SentryNavigatorObserver(),
-          ],
-          title: StringConstants.appName,
-          darkTheme: ThemeData.dark(),
-          theme: ThemeManager.lightTheme,
-          themeMode: ThemeMode.system,
-          home: AuthenitcationScreen(),
-        );
-      }),
-    ),
-  ));
+class Khutaa extends StatelessWidget {
+  const Khutaa({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return DefaultAssetBundle(
+      bundle: SentryAssetBundle(),
+      child: MultiProvider(
+        providers: providers,
+        child: Sizer(builder: (context, orientation, deviceType) {
+          return MaterialApp(
+            navigatorObservers: [
+              SentryNavigatorObserver(),
+            ],
+            title: StringConstants.appName,
+            darkTheme: ThemeData.dark(),
+            theme: ThemeManager.lightTheme,
+            themeMode: ThemeMode.system,
+            home: AuthenitcationScreen(),
+          );
+        }),
+      ),
+    );
+  }
 }
