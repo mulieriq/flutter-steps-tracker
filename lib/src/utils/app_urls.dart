@@ -8,4 +8,5 @@ class AppUrls {
   static String leadersBoardIcon = "assets/art/leaders_board.png";
   static String cupOfCofee = "assets/art/coffee_cup_icon.png";
   static String watch = "assets/art/watch.png";
+  static const String envFile = '.env';
 }

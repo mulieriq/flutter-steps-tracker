@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:pedometer/pedometer.dart';
 
 String formatDate(DateTime d) {

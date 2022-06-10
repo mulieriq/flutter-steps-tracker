@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:khutaa/src/utils/permission_manager.dart';
+import '../../utils/permission_manager.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/app_constants_util.dart';
