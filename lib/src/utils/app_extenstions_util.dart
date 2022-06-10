@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'color_palette_util.dart';
 import 'string_constants_util.dart';
 
-extension StringExtensions on String {
-  String operator &(String? other) => '$this $other';
-}
+
 
 extension NavigationExtensions on BuildContext {
   Future<dynamic> appNavigatorPush(dynamic path) => Navigator.of(this)
