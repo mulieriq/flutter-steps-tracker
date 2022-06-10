@@ -175,11 +175,15 @@ class _HomePageState extends State<HomePage> {
                                                 SquareCard(
                                                   title: StringConstants
                                                       .watchFromJarir,
+                                                  subtitle:
+                                                      StringConstants.price,
                                                   art: AppUrls.watch,
                                                 ),
                                                 SquareCard(
                                                   title: StringConstants
                                                       .starbucksCoffee,
+                                                  subtitle:
+                                                      StringConstants.price,
                                                   art: AppUrls.cupOfCofee,
                                                 )
                                               ]),

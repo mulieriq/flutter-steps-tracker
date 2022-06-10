@@ -11,7 +11,7 @@ class StringConstants {
   static const String welcomeText = 'Welcome to Khutaa';
   static const String appName = 'Khutaa';
 
-  static const String historyScreenAppBarTitle = "History Screen";
+  static const String historyScreenAppBarTitle = "History";
   static const String redeemHealthPoints = "Redeem Health Points";
   static const String leadersBoardScreenAppBarTitle = "Leadersboard";
   static const String steps = "Steps";
@@ -20,6 +20,7 @@ class StringConstants {
   static const String collectReward = "Collect Reward";
   static const String starbucksCoffee = "1 free large coffee";
   static const String watchFromJarir = " Digital Watches";
+  static const String price = " @120 Points";
 
   static const String changeLanguange = "Change Languange";
   static const String leadersBoard = "Leaders Board";
