@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:khutaa/src/utils/permission_manager.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/app_constants_util.dart';
@@ -24,6 +27,23 @@ class _AuthenitcationScreenState extends State<AuthenitcationScreen> {
   String? _gender;
   final TextEditingController _nameController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  Future<void>? initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await _route();
+    });
+    return null;
+  }
+
+  Future<void>? _route() {
+    Timer(Duration(seconds: 1), () async {
+      PermissionManager.getMotionPermission();
+    });
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

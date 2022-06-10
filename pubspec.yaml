@@ -24,6 +24,7 @@ dependencies:
   flutter_speed_dial:
   font_awesome_flutter:
   sizer:
+  permission_handler:
 
 dev_dependencies:
   flutter_test:
