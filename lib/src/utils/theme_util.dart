@@ -11,7 +11,7 @@ class ThemeManager {
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle(
-        systemNavigationBarColor: ColorPallete.darkColor,
+        systemNavigationBarColor: Colors.white,
         statusBarColor: ColorPallete.primaryColor,
         statusBarIconBrightness: Brightness.light,
       ),
