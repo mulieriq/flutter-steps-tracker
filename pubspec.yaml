@@ -21,6 +21,14 @@ dependencies:
   get_it:
   google_fonts:
   pedometer:
+  flutter_speed_dial:
+  font_awesome_flutter:
+  sizer:
+  permission_handler:
+  firebase_auth:
+  cloud_firestore:
+  sentry_flutter: ^6.0.1 
+  flutter_dotenv:
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +48,8 @@ flutter:
 
   assets:
     - assets/app/
+    - assets/art/
+    - .env
 
   # fonts:
   #   - family: Schyler
