@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:khutaa/src/core/provider/auth_provider.dart';
+import 'package:khutaa/src/core/provider/config/pedometer_provider.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:provider/provider.dart';
 import '../../utils/app_extenstions_util.dart';
 import '../../utils/app_urls.dart';
 import '../../utils/curve.dart';
@@ -24,6 +26,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    context.read<AuthProvider>().getUserName();
+    context.read<PedometerProvider>().setContext(context);
+
+    super.didChangeDependencies();
   }
 
   Widget _circle(String text) {
@@ -108,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: const EdgeInsets.only(left: 25.0),
                           child: Text(
-                            "Eric",
+                            context.read<AuthProvider>().userName,
                             style:
                                 Theme.of(context).textTheme.headline1!.copyWith(
                                       fontSize: 60,
@@ -122,7 +132,8 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 40,
                   ),
-                  Center(child: _circle("700")),
+                  Center(
+                      child: _circle(context.watch<PedometerProvider>().steps)),
                   SizedBox(
                     height: 40,
                   ),
@@ -131,7 +142,10 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       SquareCard(
                         title: StringConstants.healthPoints,
-                        subtitle: "1200",
+                        subtitle: context
+                            .watch<PedometerProvider>()
+                            .healthPoint
+                            .toString(),
                         art: AppUrls.healthIcon,
                       ),
                       InkWell(

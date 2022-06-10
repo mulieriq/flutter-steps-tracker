@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:khutaa/src/core/data/network/database_client.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../utils/color_palette_util.dart';
@@ -36,44 +39,70 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     ),
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: ColorPallete.greyColor),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Title mkuu",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline2!
-                                        .copyWith(
-                                          fontSize: 14.0,
-                                        ),
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseClient().getUserHistory(
+                          FirebaseAuth.instance.currentUser!.uid),
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot,
+                      ) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        } else if (snapshot.connectionState ==
+                                ConnectionState.active ||
+                            snapshot.connectionState == ConnectionState.done) {
+                          if (snapshot.hasError) {
+                            return Center(child: const Text('Error'));
+                          } else if (snapshot.hasData) {
+                            return ListView.builder(
+                              itemCount: 10,
+                              itemBuilder: (BuildContext context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: ColorPallete.greyColor),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Title mkuu",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline2!
+                                                .copyWith(
+                                                  fontSize: 14.0,
+                                                ),
+                                          ),
+                                          Text(
+                                            "Body",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline2!
+                                                .copyWith(
+                                                  fontSize: 14.0,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                  Text(
-                                    "Body",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline2!
-                                        .copyWith(
-                                          fontSize: 14.0,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
+                                );
+                              },
+                            );
+                          } else {
+                            return const Text('Empty data');
+                          }
+                        } else {
+                          return Text('State: ${snapshot.connectionState}');
+                        }
                       },
                     ),
                   )

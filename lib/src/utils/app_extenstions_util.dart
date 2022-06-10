@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'color_palette_util.dart';
 import 'string_constants_util.dart';
 
-
-
 extension NavigationExtensions on BuildContext {
   Future<dynamic> appNavigatorPush(dynamic path) => Navigator.of(this)
       .push(CupertinoPageRoute(builder: (BuildContext context) => path));
@@ -26,8 +24,7 @@ extension NavigationExtensions on BuildContext {
 }
 
 extension AppNotifications on BuildContext {
-  void showCustomSnackBar(String message, BuildContext context,
-      {bool isError = false}) {
+  void showCustomSnackBar(String message, {bool isError = false}) {
     ScaffoldMessenger.of(this).showSnackBar(SnackBar(
       duration: Duration(seconds: 5),
       backgroundColor: isError ? Colors.red : ColorPallete.greenColor,
